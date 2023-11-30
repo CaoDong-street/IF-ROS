@@ -13,7 +13,7 @@ Video Links: [Youtube](https://www.youtube.com/watch?v=LjTXRFqyL6Q) or [Bilibili
 
 ## 1. Installation
 
-### 1.1 Prerequisite:
+### 1.1 Prerequisite
 
 - `ROS(melodic)`
 - [`catkin_simple`](https://github.com/catkin/catkin_simple)
@@ -88,7 +88,7 @@ roslaunch inset_test_node cross.launch
 
 The experiment scene file path : `/PATH/TO/IF_ROS/multi_main_controller/Experimental_scene/cross.ttt`
 
-## 5. Acknowledgement
+## 4. Acknowledgement
 
 We sincerely thank the following open-source projects for providing valuable, high-quality code:
 
@@ -98,7 +98,7 @@ We sincerely thank the following open-source projects for providing valuable, hi
 
 [`Vision-encoder-based-Payload-State-Estimator`](https://github.com/jianhengLiu/Vision-encoder-based-Payload-State-Estimator)
 
-## 6.About
+## 5. About
 
 Author: Yu Zhang, Jie Xu, Cheng Zhao and Jiuxiang Dong from Northeastern University.
 
