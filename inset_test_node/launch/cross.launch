@@ -1,0 +1,211 @@
+<launch>
+
+
+<node pkg="multi_main_controller" type="takeoff" name="takeoff" output="screen">
+<remap from="~payload_waypoints" to="/payload_waypoint_generator/waypoints"/>
+<remap from="~quadrotor_1_waypoints" to="/quadrotor_1_waypoint_generator/waypoints"/>
+<remap from="~quadrotor_2_waypoints" to="/quadrotor_2_waypoint_generator/waypoints"/>
+<param name="continuous_lable" type = "bool"  value="false"/>
+<param name="input_waypoints_mode" type = "bool"  value="false"/>
+<param name="length" type = "double"  value="0.89"/>
+
+<param name="vel" type = "double"  value="0.25"/>
+<param name="acc" type = "double"  value="0.25"/>
+<param name="planning/dev_order" type = "int"  value="4"/>
+
+<param name="origin_Vector_x_1" value="0.4"/>
+<param name="origin_Vector_x_2" value="0.4"/>
+
+<param name="start_position/x" value="0.4"/>
+<param name="start_position/y" value="0.0"/>
+<param name="start_position/z" value="2.2"/>
+
+<param name = "ky_p1" type = "double" value = "0.01" />
+<param name = "ky_p2" type = "double" value = "0.01" />
+<param name = "ky_p3" type = "double" value = "0.01" />
+<param name = "ky_d1" type = "double" value = "0.01" />
+<param name = "ky_d2" type = "double" value = "0.01" />
+<param name = "ky_d3" type = "double" value = "0.01" />
+<param name = "k_q1" type = "double" value = "1.5" />
+<param name = "k_q2" type = "double" value = "1.5" />
+<param name = "k_q3" type = "double" value = "1.5" />
+<param name = "k_w1" type = "double" value = "0.1" />
+<param name = "k_w2" type = "double" value = "0.1" />
+<param name = "k_w3" type = "double" value = "0.1" />
+<param name = "k_R1" type = "double" value = "3.0" />
+<param name = "k_R2" type = "double" value = "3.0" />
+<param name = "k_R3" type = "double" value = "1.0" />
+<param name = "k_Omega1" type = "double" value = "0.8" />
+<param name = "k_Omega2" type = "double" value = "0.8" />
+<param name = "k_Omega3" type = "double" value = "1.0" />
+<param name = "k_bx1" type = "double" value = "2" />
+<param name = "k_bx2" type = "double" value = "2" />
+<param name = "k_bx3" type = "double" value = "1.5" />
+<param name = "k_bv1" type = "double" value = "2.5" />
+<param name = "k_bv2" type = "double" value = "2.5" />
+<param name = "k_bv3" type = "double" value = "2.5" />
+<param name = "Xk_q1" type = "double" value = "1.5" />
+<param name = "Xk_q2" type = "double" value = "1.5" />
+<param name = "Xk_q3" type = "double" value = "1.5" />
+<param name = "Xk_w1" type = "double" value = "0.1" />
+<param name = "Xk_w2" type = "double" value = "0.1" />
+<param name = "Xk_w3" type = "double" value = "0.1" />
+<param name = "Xk_R1" type = "double" value = "3.0" />
+<param name = "Xk_R2" type = "double" value = "3.0" />
+<param name = "Xk_R3" type = "double" value = "1.0" />
+<param name = "Xk_Omega1" type = "double" value = "0.8" />
+<param name = "Xk_Omega2" type = "double" value = "0.8" />
+<param name = "Xk_Omega3" type = "double" value = "1.0" />
+<param name = "Xk_bx1" type = "double" value = "1.5" />
+<param name = "Xk_bx2" type = "double" value = "1.5" />
+<param name = "Xk_bx3" type = "double" value = "1.5" />
+<param name = "Xk_bv1" type = "double" value = "2.5" />
+<param name = "Xk_bv2" type = "double" value = "2.5" />
+<param name = "Xk_bv3" type = "double" value = "2.5" />
+
+</node>
+
+    <node pkg="waypoint_generator" name="payload_waypoint_generator" type="waypoint_generator" output="screen">
+        <remap from="~goal" to="/payload_waypoint"/>
+        <remap from="~waypoints_receive_lable" to="/payload_waypoint_receive_lable"/>
+        <param name="waypoint_type" value="manual"/>
+    </node>
+
+    <node pkg="waypoint_generator" name="quadrotor_1_waypoint_generator" type="waypoint_generator" output="screen">
+        <remap from="~goal" to="/quadrotor_1_waypoint"/>
+        <remap from="~waypoints_receive_lable" to="/quadrotor_1_waypoint_receive_lable"/>
+        <param name="waypoint_type" value="manual"/>
+    </node>
+
+    <node pkg="waypoint_generator" name="quadrotor_2_waypoint_generator" type="waypoint_generator" output="screen">
+        <remap from="~goal" to="/quadrotor_2_waypoint"/>
+        <remap from="~waypoints_receive_lable" to="/quadrotor_2_waypoint_receive_lable"/>
+        <param name="waypoint_type" value="manual"/>
+    </node>
+    
+
+  <node pkg="inset_test_node"
+    type="test_inset"
+    name="test_inset_series_0"
+    output="screen">
+    <param name="bag_file" value="$(find inset_test_node)/maps/Cross_section/1/circle_r_1.5mm.bag"/>
+    <param name="bag_topic" value="/cloud"/>
+    <param name="start_lable" value="true"/>
+    <param name="end_lable" value="false"/>        
+    <param name="save_xyz" value="true"/>    
+    <param name = "xyz_directory" type = "string" value = "$(find inset_test_node)/data/xyz/1/circle_r_1.5mm.xyz" />
+    <rosparam param="initial_point_Param" >[1.5, 1.5 ]</rosparam>
+    <rosparam param="obs_origin_Param" >[0, 4,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_x" >[1, 0,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_z" >[0, 0,1 ]</rosparam>
+    <param name="length" value="0.89"/> 
+    <rosparam param="limit_bound_Param" >[0.2, 0.2,0.1,0.1 ]</rosparam>
+    <rosparam param="limit_rate_Param" >[1, 1.73]</rosparam>
+    <param name="forward_length" value="1.0"/> 
+    <param name="backward_length" value="1.0"/> 
+  </node>
+
+
+  <node pkg="inset_test_node"
+    type="test_inset"
+    name="test_inset_series_1"
+    output="screen">
+    <param name="bag_file" value="$(find inset_test_node)/maps/Cross_section/2/Prismatic_1.5mm.bag"/>
+    <param name="bag_topic" value="/cloud"/>
+    <param name="start_lable" value="false"/>    
+    <param name="end_lable" value="false"/>       
+    <param name="save_xyz" value="true"/>    
+    <param name = "xyz_directory" type = "string" value = "$(find inset_test_node)/data/xyz/2/Prismatic_1.5mm.xyz" />
+    <remap from="~iris_in_quadrotor_1" to="test_inset_series_0/iris_out_quadrotor_1"/>
+    <remap from="~iris_in_quadrotor_2" to="test_inset_series_0/iris_out_quadrotor_2"/>
+    <remap from="~iris_in_payload" to="test_inset_series_0/iris_out_payload"/>
+    <rosparam param="initial_point_Param" >[1.5, 1.5 ]</rosparam>
+    <rosparam param="obs_origin_Param" >[0, 8,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_x" >[1, 0,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_z" >[0, 0,1 ]</rosparam>
+    <param name="length" value="0.89"/> 
+    <rosparam param="limit_bound_Param" >[0.2, 0.2,0.1,0.1 ]</rosparam>
+    <rosparam param="limit_rate_Param" >[1, 1.73]</rosparam>
+    <param name="forward_length" value="1.0"/> 
+    <param name="backward_length" value="1.0"/>  
+  </node>
+
+
+  <node pkg="inset_test_node"
+    type="test_inset"
+    name="test_inset_series_2"
+    output="screen">
+    <param name="bag_file" value="$(find inset_test_node)/maps/Cross_section/3/Equilateral_triangle_1.5mm.bag"/>
+    <param name="bag_topic" value="/cloud"/>
+    <param name="start_lable" value="false"/> 
+    <param name="end_lable" value="false"/>         
+    <param name="save_xyz" value="true"/>    
+    <param name = "xyz_directory" type = "string" value = "$(find inset_test_node)/data/xyz/3/Equilateral_triangle_1.5mm.xyz" />
+    <remap from="~iris_in_quadrotor_1" to="test_inset_series_1/iris_out_quadrotor_1"/>
+    <remap from="~iris_in_quadrotor_2" to="test_inset_series_1/iris_out_quadrotor_2"/>
+    <remap from="~iris_in_payload" to="test_inset_series_1/iris_out_payload"/>
+    <rosparam param="initial_point_Param" >[1.5, 1.5 ]</rosparam>
+    <rosparam param="obs_origin_Param" >[0, 12,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_x" >[1, 0,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_z" >[0, 0,1 ]</rosparam>
+    <param name="length" value="0.89"/> 
+    <rosparam param="limit_bound_Param" >[0.2, 0.2,0.1,0.1 ]</rosparam>
+    <rosparam param="limit_rate_Param" >[1, 1.73]</rosparam>
+    <param name="forward_length" value="1.0"/> 
+    <param name="backward_length" value="1.0"/> 
+  </node>
+
+
+  <node pkg="inset_test_node"
+    type="test_inset"
+    name="test_inset_series_3"
+    output="screen">
+    <param name="bag_file" value="$(find inset_test_node)/maps/Cross_section/4/hexagon_1mm.bag"/>
+    <param name="bag_topic" value="/cloud"/>
+    <param name="start_lable" value="false"/>    
+    <param name="end_lable" value="false"/>       
+    <param name="save_xyz" value="true"/>    
+    <param name = "xyz_directory" type = "string" value = "$(find inset_test_node)/data/xyz/4/hexagon_1mm.xyz" />
+    <remap from="~iris_in_quadrotor_1" to="test_inset_series_2/iris_out_quadrotor_1"/>
+    <remap from="~iris_in_quadrotor_2" to="test_inset_series_2/iris_out_quadrotor_2"/>
+    <remap from="~iris_in_payload" to="test_inset_series_2/iris_out_payload"/>
+    <rosparam param="initial_point_Param" >[1.5, 1.5 ]</rosparam>
+    <rosparam param="obs_origin_Param" >[0, 16,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_x" >[1, 0,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_z" >[0, 0,1 ]</rosparam>
+    <param name="length" value="0.89"/> 
+    <rosparam param="limit_bound_Param" >[0.2, 0.2,0.1,0.1 ]</rosparam>
+    <rosparam param="limit_rate_Param" >[1, 1.73]</rosparam>
+    <param name="forward_length" value="1.0"/> 
+    <param name="backward_length" value="1.0"/> 
+  </node>
+
+
+  <node pkg="inset_test_node"
+    type="test_inset"
+    name="test_inset_series_4"
+    output="screen">
+    <param name="bag_file" value="$(find inset_test_node)/maps/Cross_section/5/Heart_shaped_1.5mm.bag"/>
+    <param name="bag_topic" value="/cloud"/>
+    <param name="start_lable" value="false"/>
+    <param name="end_lable" value="true"/>           
+    <param name="save_xyz" value="true"/>    
+    <param name = "xyz_directory" type = "string" value = "$(find inset_test_node)/data/xyz/5/Heart_shaped_1.5mm.xyz" />
+    <remap from="~iris_in_quadrotor_1" to="test_inset_series_3/iris_out_quadrotor_1"/>
+    <remap from="~iris_in_quadrotor_2" to="test_inset_series_3/iris_out_quadrotor_2"/>
+    <remap from="~iris_in_payload" to="test_inset_series_3/iris_out_payload"/>
+    <rosparam param="initial_point_Param" >[1.5, 1.5 ]</rosparam>
+    <rosparam param="obs_origin_Param" >[0, 20,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_x" >[1, 0,0 ]</rosparam>
+    <rosparam param="obs_attitude_Param_z" >[0, 0,1 ]</rosparam>
+    <param name="length" value="0.89"/> 
+    <rosparam param="limit_bound_Param" >[0.2, 0.2,0.1,0.1 ]</rosparam>
+    <rosparam param="limit_rate_Param" >[1, 1.73]</rosparam>
+    <param name="forward_length" value="1.0"/> 
+    <param name="backward_length" value="1.0"/> 
+  </node>
+
+
+</launch>
+
+
