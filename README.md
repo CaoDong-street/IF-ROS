@@ -100,9 +100,7 @@ We sincerely thank the following open-source projects for providing valuable, hi
 
 ## 5. About
 
-Author: Yu Zhang, Jie Xu, Cheng Zhao and Jiuxiang Dong from Northeastern University.
+**Author**: Yu Zhang, Jie Xu, Cheng Zhao and Jiuxiang Dong from Northeastern University.
 
-Related Paper:
-IF-Based Trajectory Planning and Cooperative Control for Transportation System of Cable Suspended Payload With Multi UAVs, Yu Zhang, Jie Xu, Cheng Zhao and Jiuxiang Dong.
-
-Our paper is to be published online soon in [IROS2023](https://ieee-iros.org/).
+**Related Paper**:
+IF-Based Trajectory Planning and Cooperative Control for Transportation System of Cable Suspended Payload With Multi UAVs, Yu Zhang, Jie Xu, Cheng Zhao and Jiuxiang Dong (Published in IROS2023). [Paper link](https://ieeexplore.ieee.org/document/10341351).
